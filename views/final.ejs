@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>FFCS TTG</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+  <h2>Time Table</h2>
+  <p>One of the few randomly generated Time Table</p>
+  <table style="border-spacing:20px" class="table table-bordered">
+    <thead>
+    <tr id="thHours">
+      <th>Theory Hours</th>
+      <th>8:00AM - 8:50AM</th>
+      <th>9:00AM - 9:50AM</th>
+      <th>10:00AM - 10:50AM</th>
+      <th>11:00AM - 11:50AM</th>
+      <th>12:00AM - 12:50AM</th>
+      <th></th>
+      <th>2:00PM - 2:50PM</th>
+      <th>3:00PM - 3:50PM</th>
+      <th>4:00PM - 4:50PM</th>
+      <th>5:00PM - 5:50PM</th>
+      <th>6:00PM - 6:50PM</th>
+      <th></th>
+    </tr>
+    <thead id="labHours">
+    <tr>
+      <th>Lab Hours</th>
+      <th>8:00AM - 8:50AM</th>
+      <th>9:00AM - 9:50AM</th>
+      <th>10:00AM - 10:50AM</th>
+      <th>11:00AM - 11:50AM</th>
+      <th>11:50AM - 12:40PM</th>
+      <th>12:40AM - 1:30PM</th>
+      <th>2:00PM - 2:50PM</th>
+      <th>3:00PM - 3:50PM</th>
+      <th>4:00PM - 4:50PM</th>
+      <th>5:00PM - 5:50PM</th>
+      <th>5:50PM - 6:40PM</th>
+      <th>6:40PM - 7:30PM</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <th>Monday</th>
+      <td class = "A1 L1">A1</td>
+      <td class = "F1 L2">F1</td>
+      <td class = "C1 L3">C1</td>
+      <td class = "E1 L4">E1</td>
+      <td class = "TD1 L5">TD1</td>
+      <td class = "L6"></td>
+      <td class = "A2 L31">A2</td>
+      <td class = "F2 L32">F2</td>
+      <td class = "C2 L33">C2</td>
+      <td class = "E2 L34">E2</td>
+      <td class = "TD2 L35">TD2</td>
+      <td class = "L36"></td>
+    </tr>
+    <tr>
+      <th>Tuesday</th>
+      <td class = "B1 L7">B1</td>
+      <td class = "G1 L8">G1</td>
+      <td class = "D1 L9">D1</td>
+      <td class = "TA1 L10">TA1</td>
+      <td class = "TF1 L11">TF1</td>
+      <td class = "L12"></td>
+      <td class = "B2 L37">B2</td>
+      <td class = "G2 L38">G2</td>
+      <td class = "D2 L39">D2</td>
+      <td class = "TA2 L40">TA2</td>
+      <td class = "TF2 L41">TF2</td>
+      <td class = "L42"></td>
+    </tr>
+    <tr>
+      <th>Wednesday</th>
+      <td class = "C1 L13">C1</td>
+      <td class = "F1 L14">F1</td>
+      <td class = "E1 L15">E1</td>
+      <td class = "TB1 L16">TB1</td>
+      <td class = "TG1 L17">TG1</td>
+      <td class = "L18"></td>
+      <td class = "C2 L43">C2</td>
+      <td class = "F2 L44">F2</td>
+      <td class = "E2 L45">E2</td>
+      <td class = "TB2 L46">TB2</td>
+      <td class = "TG2 L47">TG2</td>
+      <td class = "L48"></td>
+    </tr>
+    <tr>
+      <th>Thursday</th>
+      <td class = "D1 L19">D1</td>
+      <td class = "A1 L20">A1</td>
+      <td class = "F1 L21">F1</td>
+      <td class = "C1 L22">C1</td>
+      <td class = "TE1 L23">TE1</td>
+      <td class = "L24"></td>
+      <td class = "D2 L49">D2</td>
+      <td class = "A2 L50">A2</td>
+      <td class = "F2 L51">F2</td>
+      <td class = "C2 L52">C2</td>
+      <td class = "TE2 L53">TE2</td>
+      <td class = "L54"></td>
+    </tr>
+    <tr>
+      <th>Friday</th>
+      <td class = "E1 L25">E1</td>
+      <td class = "B1 L26">B1</td>
+      <td class = "G1 L27">G1</td>
+      <td class = "D1 L28">D1</td>
+      <td class = "TC1 L29">TC1</td>
+      <td class = "L30"></td>
+      <td class = "E2 L55">E2</td>
+      <td class = "B2 L56">B2</td>
+      <td class = "G2 L57">G2</td>
+      <td class = "D2 L58">D2</td>
+      <td class = "TC2 L59">TC2</td>
+      <td class = "L60"></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<script>
+  var test3 = <%- JSON.stringify(t_content) %>;
+  var test = [];
+  var test2 = [];
+  $(document).ready(function(){
+
+    for(i = 0 ; i<test3.length ; i++){
+  //    console.log(test3[i]);
+      if(test3[i][0] == 'L'){
+        var res = test3[i].split('-');
+        var obj = new Object;
+        obj["slot"] = res[0];
+        obj["code"] = res[1];
+        obj["l_cre"] = res[2];
+        console.log(obj);
+        test2.push(obj);
+      }
+      else{
+        var res = test3[i].split('-');
+        var obj = new Object;
+        var res2 = res[0].split('+');
+        obj["slot"] = res2[0];
+        obj["code"] = res[1];
+        obj["t_cre"] = res[2];
+        test.push(obj);
+      }
+    }
+  console.log(JSON.stringify(test),JSON.stringify(test2));
+    for(i = 0;i<test.length;i++ ){
+    //  console.log(test[i].slot);
+      var temp = '.' + test[i].slot;
+      var temp2 = '.T' + test[i].slot;
+      if(test[i].slot === "B1" || test[i].slot === "G1" || test[i].slot === "B2" || test[i].slot === "G2" || test[i].slot === "A2" || test[i].slot === "A1"){
+        if(test[i].t_cre === 3){
+        $(temp2).addClass("enable");
+        $(temp2).html(test[i].code);
+      }
+        $(temp).addClass("enable");
+        $(temp).html(test[i].code);
+      }
+      else{
+        if(test[i].t_cre === 4){
+        $(temp2).addClass("enable");
+        $(temp2).html(test[i].code);
+      }
+        $(temp).addClass("enable");
+        $(temp).html(test[i].code);
+      }
+      }
+
+      for(i =0;i < test2.length; i++){
+        if(test2[i].l_cre > 1){
+          for(j =0;j < test2[i].slot.length; j++){
+            var res = test2[i].slot[j].split('+');
+            console.log(test2[i].slot[j]);
+            console.log(res);
+            $('.' + res[0]).addClass("enable");
+            $('.' + res[0]).html(test2[i].code);
+            $('.' + res[1]).addClass("enable");
+            $('.' + res[1]).html(test2[i].code);
+          }
+        }
+        else{
+          var res = test2[i].slot.split('+');
+          $('.' + res[0]).addClass("enable");
+          $('.' + res[0]).html(test2[i].code);
+          $('.' + res[1]).addClass("enable");
+          $('.' + res[1]).html(test2[i].code);
+        }
+      }
+
+    }
+  );
+</script>
+</body>
+</html>

@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>VIT Faculty DB</title>
+
+    <meta name="description" content="Source code generated using layoutit.com">
+    <meta name="author" content="LayoutIt!">
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="bootstrap-theme.min.css">
+    <link href="css/style.css" rel="stylesheet">
+
+    <style>
+    Table#myTable
+    {
+    border-collapse: collapse;
+    }
+    </style>
+
+  </head>
+  <body>
+
+    <div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="page-header">
+				<h1>
+					VIT(SCSE)<small class="pull-right">Faculty Time Table Generator</small>
+				</h1>
+			</div>
+			<div class="row">
+			<div class="col-md-4">
+					<dl>
+						<dt>
+							<h3>Faculty Details</h3>
+						</dt>
+						<dt>Name</dt>
+						<dd><%=user.name%></dd>
+						<dt>Designation</dt>
+						<dd><%=user.designation%></dd>
+						<dt>Faculty ID</dt>
+						<dd id="facid"><%=user.id%></dd>
+					</dl>
+				</div>
+        <div class="col-md-4" id="slots">
+          <ul id="list1">
+            <li>
+            <h3>Theory courses Selected</h3>
+          </li>
+            <li id="boom">
+              None selected at the moment. Select Some to get started.
+            </li>
+          </dl>
+        </div>
+        <div class="col-md-4" id="slots1">
+          <ul id="list2">
+            <li>
+            <h3>Lab courses Selected</h3>
+          </li>
+            <li id="boom1">
+              None selected at the moment. Select Some to get started.
+            </li>
+        </div>
+			</div>
+      <center><button id="butt"> Submit </button> </center>
+    </div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+      <div class="form-group pull-right">
+        <input type="text" class="search form-control" placeholder="What you looking for?">
+      </div>
+      <span class="counter pull-right"></span>
+			<div class="tabbable" id="tabs-569454">
+				<ul class="nav nav-tabs">
+					<li>
+						<a href="#panel-302482" data-toggle="tab">Labs</a>
+					</li>
+					<li class="active">
+						<a href="#panel-780482" data-toggle="tab">Theory</a>
+					</li>
+				</ul>
+				<div class="tab-content">
+					<div class="tab-pane" id="panel-302482">
+            <div class="col-md-12" style="overflow-y:scroll; height:300px;">
+            <table id='myTable' class="table table-hover results"  width="100%">
+            <thead>
+            <tr>
+            <th> Course Code </th>
+            <th> Course Title</th>
+            <th> Course Type </th>
+            <th> L </th>
+            <th> T </th>
+            <th> P </th>
+            <th> C </th>
+            </tr>
+            </thead>
+            <tbody>
+            <%for(x in data){
+              if(data[x].l == 0){%>
+            <tr>
+            <td><%=data[x].code%></td>
+            <td><%-data[x].title%></td>
+            <td><%=data[x].type%></td>
+            <td><%=data[x].l%></td>
+            <td><%=data[x].t%></td>
+            <td><%=data[x].p%></td>
+            <td><%=data[x].c%></td>
+            </tr>
+            <%}
+          }%>
+            </tbody>
+            </table>
+          </div>
+          </div>
+					<div class="tab-pane active" id="panel-780482">
+            <div class="col-md-12" style="overflow-y:scroll; height:300px;">
+            <table id='myTable2' class="table table-hover results" width="100%">
+            <thead>
+            <tr>
+            <th> Course Code </th>
+            <th> Course Title</th>
+            <th> Course Type </th>
+            <th> L </th>
+            <th> T </th>
+            <th> P </th>
+            <th> C </th>
+            </tr>
+            </thead>
+            <tbody>
+            <%for(x in data){
+              if(data[x].l != 0){%>
+            <tr>
+            <td><%=data[x].code%></td>
+            <td><%-data[x].title%></td>
+            <td><%=data[x].type%></td>
+            <td><%=data[x].l%></td>
+            <td><%=data[x].t%></td>
+            <td><%=data[x].p%></td>
+            <td><%=data[x].c%></td>
+            </tr>
+            <%}
+          }%>
+            </tbody>
+            </table>
+          </div>
+          </div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+    <script src="js\jsonfile.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/scripts.js"></script>
+    <script>
+    var tlimit=0;
+    var llimit=0;
+    $(document).ready(function(){
+      $("#butt").click(myfunc);
+    $("#myTable tr").click(function() {
+        if(this.style.backgroundColor=="lime")
+    	{
+        var flag=0;
+        var i=0;
+    		var n=document.getElementById('myTable').rows.length;
+    		for(i=0;i<n;i++)
+    		{
+    			var x=this.cells;
+    			var y=document.getElementById('myTable').rows[i].cells;
+    			if(x[0].innerHTML==y[0].innerHTML && this!=document.getElementById('myTable').rows[i])
+    			{
+    				if(document.getElementById('myTable').rows[i].style.backgroundColor == "lime")
+            {
+              flag=1;
+              break;
+            }
+    			}
+    		}
+        if(flag==1)
+        {
+          $(this).css('background-color', 'aqua');
+          llimit--;
+        }
+        else
+        {
+        		var i=0;
+        		var n=document.getElementById('myTable').rows.length;
+        		for(i=0;i<n;i++)
+        		{
+        			var x=this.cells;
+        			var y=document.getElementById('myTable').rows[i].cells;
+        			if(x[0].innerHTML==y[0].innerHTML)
+        			{
+        				document.getElementById('myTable').rows[i].style.backgroundColor = "white";
+        			}
+        		}
+            llimit--;
+        }
+    	}
+      else if(this.style.backgroundColor=="aqua")
+      {
+
+          if(llimit<3)
+          {
+            $(this).css('background-color', 'lime');
+            llimit++;
+          }
+          else{
+            window.alert("You cannot select more than 3 lab slots");
+          }
+          }
+      else
+    	{
+        if(llimit<3)
+        {
+        var g=document.getElementById("myTable").rows[0].cells;
+        if(this.cells!=g)
+        {
+        var i=0;
+    		var n=document.getElementById('myTable').rows.length;
+    		for(i=0;i<n;i++)
+    		{
+    			var x=this.cells;
+    			var y=document.getElementById('myTable').rows[i].cells;
+    			if(x[0].innerHTML==y[0].innerHTML)
+          {
+            if(document.getElementById('myTable').rows[i].style.backgroundColor == "lime")
+            {
+              document.getElementById('myTable').rows[i].style.backgroundColor = "lime";
+            }
+            else
+            {
+              document.getElementById('myTable').rows[i].style.backgroundColor = "aqua";
+            }
+          }
+    			else
+    			{
+            if(document.getElementById('myTable').rows[i].style.backgroundColor == "lime")
+            {
+              document.getElementById('myTable').rows[i].style.backgroundColor = "lime";
+            }
+            else
+            {
+                document.getElementById('myTable').rows[i].style.backgroundColor = "white";
+            }
+    			}
+    		}
+    		$(this).css('background-color', 'lime');
+        llimit++;
+        }
+      }
+      else{
+        window.alert("You cannot select more than 3 lab slots");
+      }
+    	}
+      var c=this.cells;
+      var x=c[1].innerHTML;
+      if(this.style.backgroundColor=="lime")
+      {
+        var flag=0;
+        var lis=document.getElementById("slots1").getElementsByTagName("li");
+        var size=lis.length;
+        for(var i=1;i<size;i++)
+        {
+        var l=x.length;
+        var p=lis[i].innerHTML.slice(0,l);
+        if(x==p)
+        {
+          flag=1;
+        }
+        }
+        if(flag==1)
+        {
+          flag=1;
+        }
+        else
+        {
+        document.getElementById("boom1").style.display="none";
+        var li=document.createElement("li");
+        var exp=document.createElement("input");
+        exp.setAttribute("type","text");
+        var h = this.cells;
+        var j = h[0].innerHTML;
+        exp.setAttribute("placeholder","Enter Experience");
+        var k = "l" + j;
+        exp.setAttribute("id",k);
+        var s=document.getElementById("slots1");
+        var n=document.createTextNode(x+" ");
+        li.appendChild(n);
+        li.appendChild(exp);
+        s.appendChild(li);
+        }
+      }
+      else if(this.style.backgroundColor=="white")
+      {
+        var flag=0;
+        var lis=document.getElementById("slots1").getElementsByTagName("li");
+        var size=lis.length;
+        var list=document.getElementById("list2");
+        for(var i=1;i<size;i++)
+        {
+          var l=x.length;
+          var p=lis[i].innerHTML.slice(0,l)
+          if(x==p)
+          {
+              lis[i].remove();
+          }
+        }
+        if(lis[1]===undefined)
+        {
+          document.getElementById("boom1").style.visibility="initial";
+        }
+      }
+      else
+      {
+      var x=0;
+      }
+    });
+
+    $("#myTable2 tr").click(function() {
+      if(this.style.backgroundColor=="lime")
+      {
+      var flag=0;
+      var i=0;
+      var n=document.getElementById('myTable2').rows.length;
+      for(i=0;i<n;i++)
+      {
+        var x=this.cells;
+        var y=document.getElementById('myTable2').rows[i].cells;
+        if(x[0].innerHTML==y[0].innerHTML && this!=document.getElementById('myTable2').rows[i])
+        {
+          if(document.getElementById('myTable2').rows[i].style.backgroundColor == "lime")
+          {
+            flag=1;
+            break;
+          }
+        }
+      }
+      if(flag==1)
+      {
+        $(this).css('background-color', 'aqua');
+        tlimit--;
+      }
+      else
+      {
+          var i=0;
+          var n=document.getElementById('myTable2').rows.length;
+          for(i=0;i<n;i++)
+          {
+            var x=this.cells;
+            var y=document.getElementById('myTable2').rows[i].cells;
+            if(x[0].innerHTML==y[0].innerHTML)
+            {
+              document.getElementById('myTable2').rows[i].style.backgroundColor = "white";
+            }
+          }
+          tlimit--;
+      }
+    }
+    else if(this.style.backgroundColor=="aqua")
+    {
+        if(tlimit<2)
+        {
+        $(this).css('background-color', 'lime');
+        tlimit++;
+        }
+        else
+        {
+            window.alert("You cannot select more than 2 theory slots");
+        }
+    }
+    else
+    {
+      if(tlimit<2)
+      {
+        var g=document.getElementById("myTable2").rows[0].cells;
+        if(this.cells!=g)
+        {
+          var i=0;
+          var n=document.getElementById('myTable2').rows.length;
+          for(i=0;i<n;i++)
+          {
+          var x=this.cells;
+          var y=document.getElementById('myTable2').rows[i].cells;
+          if(x[0].innerHTML==y[0].innerHTML)
+          {
+            if(document.getElementById('myTable2').rows[i].style.backgroundColor == "lime")
+            {
+            document.getElementById('myTable2').rows[i].style.backgroundColor = "lime";
+            }
+            else
+            {
+            document.getElementById('myTable2').rows[i].style.backgroundColor = "aqua";
+            }
+          }
+          else
+          {
+            if(document.getElementById('myTable2').rows[i].style.backgroundColor == "lime")
+            {
+              document.getElementById('myTable2').rows[i].style.backgroundColor = "lime";
+            }
+            else
+            {
+              document.getElementById('myTable2').rows[i].style.backgroundColor = "white";
+            }
+          }
+        }
+        $(this).css('background-color', 'lime');
+        tlimit++;
+      }
+    }
+    else
+    {
+        window.alert("You cannot select more than 2 theory slots");
+    }
+    }
+    var c=this.cells;
+    var x=c[1].innerHTML;
+    if(this.style.backgroundColor=="lime")
+    {
+      var flag=0;
+      var lis=document.getElementById("slots").getElementsByTagName("li");
+      var size=lis.length;
+      for(var i=1;i<size;i++)
+      {
+      var l=x.length;
+      var p=lis[i].innerHTML.slice(0,l)
+      if(x==p)
+      {
+        flag=1;
+      }
+      }
+      if(flag==1)
+      {
+        flag=1;
+      }
+      else
+      {
+      document.getElementById("boom").style.display="none";
+      var li=document.createElement("li");
+      var exp=document.createElement("input");
+      exp.setAttribute("type","text");
+      var h = this.cells;
+      var j = h[0].innerHTML;
+      exp.setAttribute("placeholder","Enter Experience");
+      var k = "t" + j;
+      exp.setAttribute("id",k);
+      var s=document.getElementById("slots");
+      var n=document.createTextNode(x+" ");
+      li.appendChild(n);
+      li.appendChild(exp);
+      s.appendChild(li);
+      }
+    }
+    else if(this.style.backgroundColor=="white")
+    {
+      var flag=0;
+      var lis=document.getElementById("slots").getElementsByTagName("li");
+      var size=lis.length;
+      var list=document.getElementById("list1");
+      for(var i=1;i<size;i++)
+      {
+        var l=x.length;
+        var p=lis[i].innerHTML.slice(0,l)
+        if(x==p)
+        {
+            lis[i].remove();
+        }
+      }
+      if(lis[1]===undefined)
+      {
+        document.getElementById("boom").style.visibility="initial";
+      }
+    }
+    else
+    {
+    var x=0;
+    }
+    });
+    });
+    </script>
+  </body>
+</html>

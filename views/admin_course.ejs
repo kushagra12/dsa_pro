@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Admin Page-Courses</title>
+
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/jquery-ui.css" rel="stylesheet">
+    <link href="/css/simple-sidebar.css" rel="stylesheet">
+    <link href="/css/chosen.css" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="/admin">
+                      VIT Faculty Login
+                    </a>
+                </li>
+                <li>
+                    <a href="/admin/course">Courses</a>
+                </li>
+                <li>
+                    <a href="/admin/user">Users</a>
+                </li>
+                <li>
+                    <a href="#">Finalize</a>
+                </li>
+          </ul>
+        </div>
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row" id="home">
+                    <div class="col-lg-12">
+                      <form  action="/correct" method="post">
+                      <div id="accordion">
+
+                        <%for(x in courses){%>
+                          <h3><%=courses[x].code%> - <%=courses[x].type%></h3>
+                          <div id="<%=courses[x].code%>">
+                              <div class="row">
+                                <div class= "col-md-4">
+                              <h4>Course Title</h4>
+                              <p><%=courses[x].title%></p>
+                            </div>
+                            <div class= "col-md-4">
+                              <h4>Course Credits</h4>
+                            <p><%=courses[x].c%></p>
+                            </div>
+                          <div class= "col-md-4">
+                            <h4>Course Program</h4>
+                            <p><%=courses[x].program%></p>
+                          </div>
+                            </div>
+
+                            <%if((typeof courses[x].list_faculty  != 'undefined') && (courses[x].list_faculty.length > 0)){%>
+                              <%for(y = 0; y < courses[x].list_faculty.length; y++){%>
+                                <div class="col-md-2">
+                                <h4>Faculty Id</h4>
+                                <p><%=courses[x].list_faculty[y].id%></p>
+                                <h4>Faculty Experience</h4>
+                                <p><%=courses[x].list_faculty[y].exp%></p>
+                                <div class='row'>
+                                  <div class="side-by-side clearfix">
+                                    <div>
+                                      <em>Select Slots</em>
+                                      <select data-placeholder="Choose a Slot" class="slots-name" multiple name="<%=courses[x].list_faculty[y].id%>">
+                                        <option value=""></option>
+                                        <%if(courses[x].type == 'ETH' || courses[x].type == 'TH')
+                                        {%>
+                                        <%if(courses[x].c == 1){%>
+                                        <option value="TA1-<%=courses[x].code%>-<%=courses[x].c%>">TA1</option>
+                                        <option value="TA2-<%=courses[x].code%>-<%=courses[x].c%>">TA2</option>
+                                        <option value="TB1-<%=courses[x].code%>-<%=courses[x].c%>">TB1</option>
+                                        <option value="TB2-<%=courses[x].code%>-<%=courses[x].c%>">TB2</option>
+                                        <option value="TG1-<%=courses[x].code%>-<%=courses[x].c%>">TG1</option>
+                                        <option value="TG2-<%=courses[x].code%>-<%=courses[x].c%>">TG2</option>
+                                        <%}%>
+                                        <%if(courses[x].c == 2){%>
+                                        <option value="A1-<%=courses[x].code%>-<%=courses[x].c%>">A1</option>
+                                        <option value="A2-<%=courses[x].code%>-<%=courses[x].c%>">A2</option>
+                                        <option value="B1-<%=courses[x].code%>-<%=courses[x].c%>">B1</option>
+                                        <option value="B2-<%=courses[x].code%>-<%=courses[x].c%>">B2</option>
+                                        <option value="G1-<%=courses[x].code%>-<%=courses[x].c%>">G1</option>
+                                        <option value="G2-<%=courses[x].code%>-<%=courses[x].c%>">G2</option>
+                                        <%}%>
+                                        <%if(courses[x].c == 3){%>
+                                        <option value="A1+TA1-<%=courses[x].code%>-<%=courses[x].c%>">A1+TA1</option>
+                                        <option value="A2+TA2-<%=courses[x].code%>-<%=courses[x].c%>">A2+TA2</option>
+                                        <option value="B1+TB1-<%=courses[x].code%>-<%=courses[x].c%>">B1+TB1</option>
+                                        <option value="B2+TB2-<%=courses[x].code%>-<%=courses[x].c%>">B2+TB2</option>
+                                        <option value="G1+TG1-<%=courses[x].code%>-<%=courses[x].c%>">G1+TG1</option>
+                                        <option value="G2+TG2-<%=courses[x].code%>-<%=courses[x].c%>">G1+TG2</option>
+                                        <option value="C1-<%=courses[x].code%>-<%=courses[x].c%>">C1</option>
+                                        <option value="C2-<%=courses[x].code%>-<%=courses[x].c%>">C2</option>
+                                        <option value="D1-<%=courses[x].code%>-<%=courses[x].c%>">D1</option>
+                                        <option value="D2-<%=courses[x].code%>-<%=courses[x].c%>">D2</option>
+                                        <option value="E1-<%=courses[x].code%>-<%=courses[x].c%>">E1</option>
+                                        <option value="E2-<%=courses[x].code%>-<%=courses[x].c%>">E2</option>
+                                        <option value="F1-<%=courses[x].code%>-<%=courses[x].c%>">F1</option>
+                                        <option value="F2-<%=courses[x].code%>-<%=courses[x].c%>">F2</option>
+                                        <%}%>
+                                        <%if(courses[x].c == 4){%>
+                                        <option value="C1+TC1-<%=courses[x].code%>-<%=courses[x].c%>">C1+TC1</option>
+                                        <option value="D1+TD1-<%=courses[x].code%>-<%=courses[x].c%>">D1+TD1</option>
+                                        <option value="E1+TE1-<%=courses[x].code%>-<%=courses[x].c%>">E1+TE1</option>
+                                        <option value="F1+TF1-<%=courses[x].code%>-<%=courses[x].c%>">F1+TF1</option>
+                                        <option value="C2+TC2-<%=courses[x].code%>-<%=courses[x].c%>">C2+TC2</option>
+                                        <option value="D2+TD2-<%=courses[x].code%>-<%=courses[x].c%>">D2+TD2</option>
+                                        <option value="E2+TE2-<%=courses[x].code%>-<%=courses[x].c%>">E2+TE2</option>
+                                        <option value="F2+TF2-<%=courses[x].code%>-<%=courses[x].c%>">F2+TF2</option>
+                                        <%}}%>
+                                        <%if(courses[x].type == 'ELA' || courses[x].type == 'LO')
+                                        {%>
+                                          <option value="L1+L2-<%=courses[x].code%>-<%=courses[x].c%>">L1+L2</option>
+                                          <option value="L3+L4-<%=courses[x].code%>-<%=courses[x].c%>">L3+L4</option>
+                                          <option value="L5+L6-<%=courses[x].code%>-<%=courses[x].c%>">L5+L6</option>
+                                          <option value="L7+L8-<%=courses[x].code%>-<%=courses[x].c%>">L7+L8</option>
+                                          <option value="L9+L10-<%=courses[x].code%>-<%=courses[x].c%>">L9+L10</option>
+                                          <option value="L11+L12-<%=courses[x].code%>-<%=courses[x].c%>">L11+L12</option>
+                                          <option value="L13+L14-<%=courses[x].code%>-<%=courses[x].c%>">L13+L14</option>
+                                          <option value="L15+L16-<%=courses[x].code%>-<%=courses[x].c%>">L15+L16</option>
+                                          <option value="L17+L18-<%=courses[x].code%>-<%=courses[x].c%>">L17+L18</option>
+                                          <option value="L19+L20-<%=courses[x].code%>-<%=courses[x].c%>">L19+L20</option>
+                                          <option value="L21+L22-<%=courses[x].code%>-<%=courses[x].c%>">L21+L22</option>
+                                          <option value="L23+L24-<%=courses[x].code%>-<%=courses[x].c%>">L23+L24</option>
+                                          <option value="L25+L26-<%=courses[x].code%>-<%=courses[x].c%>">L25+L26</option>
+                                          <option value="L27+L28-<%=courses[x].code%>-<%=courses[x].c%>">L27+L28</option>
+                                          <option value="L29+L30-<%=courses[x].code%>-<%=courses[x].c%>">L29+L30</option>
+                                          <option value="L31+L32-<%=courses[x].code%>-<%=courses[x].c%>">L31+L32</option>
+                                          <option value="L33+L34-<%=courses[x].code%>-<%=courses[x].c%>">L33+L34</option>
+                                          <option value="L35+L36-<%=courses[x].code%>-<%=courses[x].c%>">L35+L36</option>
+                                          <option value="L37+L38-<%=courses[x].code%>-<%=courses[x].c%>">L37+L38</option>
+                                          <option value="L39+L40-<%=courses[x].code%>-<%=courses[x].c%>">L39+L40</option>
+                                          <option value="L41+L42-<%=courses[x].code%>-<%=courses[x].c%>">L41+L42</option>
+                                          <option value="L43+L44-<%=courses[x].code%>-<%=courses[x].c%>">L43+L44</option>
+                                          <option value="L45+L46-<%=courses[x].code%>-<%=courses[x].c%>">L45+L46</option>
+                                          <option value="L47+L48-<%=courses[x].code%>-<%=courses[x].c%>">L47+L48</option>
+                                          <option value="L49+L50-<%=courses[x].code%>-<%=courses[x].c%>">L49+L50</option>
+                                          <option value="L51+L52-<%=courses[x].code%>-<%=courses[x].c%>">L51+L52</option>
+                                          <option value="L53+L54-<%=courses[x].code%>-<%=courses[x].c%>">L53+L54</option>
+                                          <option value="L55+L56-<%=courses[x].code%>-<%=courses[x].c%>">L55+L56</option>
+                                          <option value="L57+L58-<%=courses[x].code%>-<%=courses[x].c%>">L57+L58</option>
+                                          <option value="L59+L60-<%=courses[x].code%>-<%=courses[x].c%>">L59+L60</option>
+                                          <%}%>
+                                      </select>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            <%}}%></div>
+                        <%}%></div>
+                        <input type="submit" class="btn btn-default">
+
+                    </div>
+                    </form>
+            </div>
+        </div>
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="/js/jquery.js"></script>
+    <script>
+    $(function() {
+      $( "#accordion" ).accordion({width:'90%'});
+      $(".slots-name").chosen({width:'90%'});
+    });
+
+</script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/jquery-ui.min.js"/>
+    <!-- Menu Toggle Script -->
+    <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+
+    });
+
+    </script>
+    <script src="/js/chosen.jquery.min.js"></script>
+
+</body>
+
+</html>
